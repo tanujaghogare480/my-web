@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💖 will you marry me? forever yes? 💖</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #b8e2ff;
+      font-family: 'Comic Neue', 'Quicksand', 'Segoe UI', cursive, sans-serif;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .bg-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .bg-heart {
+      position: absolute;
+      color: rgba(255, 100, 170, 0.3);
+      font-size: 2rem;
+      animation: bgFloat 10s linear infinite;
+      user-select: none;
+    }
+
+    @keyframes bgFloat {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.6; }
+      100% { transform: translateY(-10vh) rotate(20deg); opacity: 0; }
+    }
+
+    .proposal-card {
+      width: 900px;           
+      max-width: 99%;
+      background: #ffffffde;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 80px 80px 70px 70px;
+      box-shadow: 0 40px 55px -20px #4690c0, 0 25px 45px #ffb0cb, 0 0 0 5px #ffffff inset;
+      padding: 40px 25px 45px;
+      text-align: center;
+      border: 4px solid white;
+      position: relative;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 900;
+      background: linear-gradient(145deg, #ff1e5a, #ff80a3);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      text-shadow: 0 5px 15px #ffb7d0;
+    }
+
+    h1 span {
+      font-size: 3.8rem;
+      filter: drop-shadow(0 4px 3px #ff5f8f);
+    }
+
+    .love-note {
+      background: #fee9f3da;
+      border-radius: 80px;
+      padding: 28px 20px;
+      margin: 15px 0 20px;
+      border: 4px dashed #ff88b0;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #b32e5e;
+      line-height: 1.8;
+      box-shadow: 0 10px 0 #ffb0c8;
+    }
+
+    .love-note i {
+      display: inline-block;
+      animation: wiggle 2.2s infinite;
+    }
+
+    @keyframes wiggle {
+      0%,100% { transform: rotate(0deg); }
+      25% { transform: rotate(5deg); }
+      75% { transform: rotate(-5deg); }
+    }
+
+    .photo-frame {
+      width: 210px;
+      height: 210px;
+      margin: 15px auto 25px;
+      border-radius: 50% 50% 40% 40%;
+      padding: 10px;
+      background: linear-gradient(135deg, #ffb7c5, #ffe0ef);
+      box-shadow: 0 22px 28px -8px #b46b8b, 0 0 0 6px white;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50% 50% 35% 35%;
+      border: 6px solid white;
+      display: block;
+      background: #ffe8f0;
+    }
+
+    .button-hug {
+      position: relative;
+      min-height: 200px;  /* Much taller for more movement space */
+      margin: 30px 0 15px;
+      width: 100%;
+      background: #f6ebff70;
+      border-radius: 60px;
+      padding: 20px;
+      border: 2px dotted white;
+    }
+
+    .btn {
+      border: none;
+      font-weight: 800;
+      font-size: 1.6rem;
+      padding: 8px 18px;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 8px 0 #b65b82, 0 10px 20px #f5acc6;
+      transition: all 0.1s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 4px solid white;
+      transform: translateY(0);
+      letter-spacing: 1px;
+    }
+
+    .btn:active {
+      transform: translateY(5px);
+      box-shadow: 0 3px 0 #b65b82, 0 10px 20px #ffb7cf;
+    }
+
+    #yesBtn {
+      background: #ffb0c5;
+      background: linear-gradient(145deg, #ff9bb8, #ff80b0);
+      color: white;
+      text-shadow: 0 2px 2px #b33262;
+      position: absolute;  /* Make YES button also absolute for consistent positioning */
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+    }
+
+    #yesBtn:hover {
+      background: #ff8eb0;
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: 0 10px 0 #a14f73, 0 15px 30px #ffbfdc;
+    }
+
+    #noBtn {
+      background: #f1daff;
+      background: linear-gradient(125deg, #f5dcff, #e8caff);
+      color: #754e73;
+      text-shadow: 0 2px 3px white;
+      position: absolute;
+      font-size: 1.6rem;
+      padding: 8px 18px;
+      border-radius: 40px;
+      gap: 8px;
+      border: 4px solid white;
+      box-shadow: 0 8px 0 #b65b82, 0 10px 20px #f5acc6;
+      transition: left 0.15s ease, top 0.15s ease; /* Fast but smooth movement */
+      cursor: default;  /* Change cursor to default since it's not clickable */
+      z-index: 60;
+      pointer-events: none;  /* This makes it completely unclickable! */
+      animation: float 3s infinite ease-in-out;
+    }
+
+    /* Add floating animation to make it more playful */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+
+    /* Celebration area */
+    .celebration {
+      display: none;
+      margin: 30px 0 10px;
+      padding: 35px 20px 40px;
+      background: #ffffffec;
+      backdrop-filter: blur(20px);
+      border-radius: 100px 100px 70px 70px;
+      border: 6px solid white;
+      box-shadow: 0 30px 45px -10px #dd6f96;
+      animation: pop 0.6s cubic-bezier(0.3, 1.4, 0.6, 1);
+    }
+
+    @keyframes pop {
+      0% { opacity: 0; transform: scale(0.1) rotate(-5deg); }
+      70% { transform: scale(1.02) rotate(1deg); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .celebration h2 {
+      font-size: 4rem;
+      background: linear-gradient(145deg, #ff165b, #ff709b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    .celebration p {
+      font-size: 2.2rem;
+      color: #b33762;
+      margin: 20px 0 20px;
+      font-weight: 700;
+    }
+
+    .celebration img {
+      width: 260px;
+      height: 260px;
+      border-radius: 80px 80px 50px 80px;
+      object-fit: cover;
+      border: 8px solid white;
+      box-shadow: 0 30px 40px #f794b5;
+      margin: 10px 0 5px;
+      background: #ffdeec;
+    }
+
+    .hearts-overlay {
+      position: relative;
+      width: 100%;
+      height: 90px;
+      margin-top: 10px;
+      pointer-events: none;
+    }
+
+    .float-heart {
+      position: absolute;
+      color: #ff3366;
+      font-size: 3rem;
+      animation: riseUp 2.4s ease-out forwards;
+      filter: drop-shadow(0 8px 8px #ff9bb8);
+    }
+
+    @keyframes riseUp {
+      0% { opacity: 1; transform: translateY(0) scale(0.8); }
+      100% { opacity: 0; transform: translateY(-170px) scale(2) rotate(20deg); }
+    }
+
+    .sparkle-star {
+      position: absolute;
+      background: #fffacd;
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      filter: blur(2px);
+      animation: twinkle 2.2s infinite;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0; transform: scale(0.4); }
+      50% { opacity: 1; transform: scale(2); background: #ffeaa5; }
+      100% { opacity: 0; transform: scale(0.4); }
+    }
+
+    .extra-fluff {
+      font-size: 2rem;
+      color: #d44d7a;
+      margin: 25px 0 5px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      background: #ffe2f0c7;
+      border-radius: 60px;
+      padding: 15px;
+      border: 4px solid white;
+    }
+
+    /* Game-like hint */
+    .game-hint {
+      font-size: 1.2rem;
+      color: #a5486e;
+      margin-top: 10px;
+      animation: pulse 1.5s infinite;
+      background: #fff0f5;
+      padding: 8px 20px;
+      border-radius: 40px;
+      display: inline-block;
+      border: 2px solid white;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="bg-hearts" id="bgHearts"></div>
+
+  <div class="proposal-card">
+    <h1>
+      <span>🥹</span> WILL YOU MARRY ME? <span>💍</span>
+    </h1>
+
+    <div class="love-note">
+      ✨ You + Me = Infinite love ✨ <br>
+      💖 You are my sunshine, my moon, my stars 💖 <br>
+      🌸 Every day with you is a fairytale 🌸 <br>
+      😍 My heart goes BOOM BOOM for you! 💘 BOOM!
+    </div>
+
+    <div class="photo-frame">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23ffd9e8' /%3E%3Ccircle cx='34' cy='38' r='12' fill='%23ffb7c5' /%3E%3Ccircle cx='66' cy='38' r='12' fill='%23ffb7c5' /%3E%3Ccircle cx='30' cy='32' r='5' fill='%235c334b' /%3E%3Ccircle cx='62' cy='32' r='5' fill='%235c334b' /%3E%3Cpath d='M37 60 Q50 78, 63 60' stroke='%23c64b73' stroke-width='6' fill='none' stroke-linecap='round' /%3E%3Ctext x='40' y='86' fill='%23ff4377' font-size='22'%3E❤️%3C/text%3E%3C/svg%3E"
+           alt="us">
+    </div>
+
+    <!-- Game hint -->
+    <div class="game-hint">
+      ⭐ Catch the YES button! NO is too fast! ⭐
+    </div>
+
+    <!-- BUTTON ZONE: YES button is clickable, NO button moves everywhere -->
+    <div class="button-hug" id="buttonHug">
+      <button class="btn" id="yesBtn">YES 💖💍</button>
+      <button class="btn" id="noBtn">NO 🙈🚫</button>
+    </div>
+
+    <div class="celebration" id="celebration">
+      <h2>💞 YEEEES! 💞</h2>
+      <p>I LOVE YOU FOREVER! 💖💖💖</p>
+      <img src="Media.jfif" alt="our love photo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 200\'%3E%3Crect width=\'200\' height=\'200\' fill=\'%23ffc1d9\'/%3E%3Ccircle cx=\'100\' cy=\'80\' r=\'45\' fill=\'%23ff9eb5\'/%3E%3Ccircle cx=\'70\' cy=\'65\' r=\'12\' fill=\'%23443244\'/%3E%3Ccircle cx=\'130\' cy=\'65\' r=\'12\' fill=\'%23443244\'/%3E%3Cpath d=\'M70 125 Q100 155, 130 125\' stroke=\'%23b32f62\' stroke-width=\'10\' fill=\'none\' stroke-linecap=\'round\' /%3E%3Ctext x=\'68\' y=\'180\' fill=\'%23ff0a4f\' font-size=\'44\'%3E❤️❤️%3C/text%3E%3C/svg%3E'; this.style.border='4px solid white'">
+      <div class="hearts-overlay" id="heartsContainer"></div>
+      <p style="font-size:2.5rem">🥰 💑 💖 🥰</p>
+    </div>
+
+    <div class="extra-fluff">
+      <span>💞💗💓💕💖💘</span>
+      <span>FOREVER YES?</span>
+      <span>💘💖💕💓💗💞</span>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // Background hearts generator
+      const bg = document.getElementById('bgHearts');
+      for (let i = 0; i < 26; i++) {
+        let h = document.createElement('div');
+        h.classList.add('bg-heart');
+        h.innerHTML = ['❤️','🧡','💛','💚','💙','💜','🤍','💖','💗','💘','💝','💞'][Math.floor(Math.random() * 12)];
+        h.style.left = Math.random() * 100 + '%';
+        h.style.animationDelay = Math.random() * 10 + 's';
+        h.style.fontSize = (Math.random() * 45 + 20) + 'px';
+        bg.appendChild(h);
+      }
+
+      const noBtn = document.getElementById('noBtn');
+      const yesBtn = document.getElementById('yesBtn');
+      const celebration = document.getElementById('celebration');
+      const heartsContainer = document.getElementById('heartsContainer');
+      const hug = document.getElementById('buttonHug');
+
+      // Make NO button move constantly like a game
+      let moveInterval;
+      let isMoving = true;
+
+      // Function to move NO button to random position
+      function moveNoButton() {
+        if (!isMoving) return;
+        
+        const hugRect = hug.getBoundingClientRect();
+        const btnRect = noBtn.getBoundingClientRect();
+        
+        // Calculate safe boundaries (keep button inside with padding)
+        const padding = 10;
+        const maxX = Math.max(0, hugRect.width - btnRect.width - (padding * 2));
+        const maxY = Math.max(0, hugRect.height - btnRect.height - (padding * 2));
+        
+        // Generate random position
+        const newX = padding + (Math.random() * maxX);
+        const newY = padding + (Math.random() * maxY);
+        
+        // Apply new position
+        noBtn.style.left = newX + 'px';
+        noBtn.style.top = newY + 'px';
+      }
+
+      // Move button every 300ms (constant movement like a game)
+      moveInterval = setInterval(moveNoButton, 300);
+
+      // Also move when mouse moves in the button area (makes it more dynamic)
+      hug.addEventListener('mousemove', (e) => {
+        if (Math.random() < 0.3) { // 30% chance to move on mouse move
+          moveNoButton();
+        }
+      });
+
+      // Move when mouse gets close to the button area
+      hug.addEventListener('mouseenter', () => {
+        // Move immediately when mouse enters
+        moveNoButton();
+      });
+
+      // Move button when window resizes
+      window.addEventListener('resize', () => {
+        moveNoButton();
+      });
+
+      // YES button click handler
+      yesBtn.addEventListener('click', () => {
+        // Stop the NO button movement
+        isMoving = false;
+        clearInterval(moveInterval);
+        
+        // Show celebration
+        celebration.style.display = 'block';
+
+        // Create floating hearts
+        for (let i = 0; i < 40; i++) {
+          createHeart();
+        }
+
+        // Create sparkles
+        for (let s = 0; s < 30; s++) {
+          let spark = document.createElement('div');
+          spark.classList.add('sparkle-star');
+          spark.style.left = Math.random() * 90 + 5 + '%';
+          spark.style.top = Math.random() * 90 + 5 + '%';
+          spark.style.background = `hsl(${Math.random() * 40 + 320}, 90%, 75%)`;
+          spark.style.animationDelay = Math.random() * 2 + 's';
+          celebration.appendChild(spark);
+          setTimeout(() => spark.remove(), 3500);
+        }
+
+        // Make YES button jump
+        yesBtn.style.transform = 'translateY(-50%) scale(1.2)';
+        setTimeout(() => yesBtn.style.transform = 'translateY(-50%) scale(1)', 350);
+
+        // Hide the NO button with a fun animation
+        noBtn.style.opacity = '0.5';
+        noBtn.style.transform = 'scale(0.8)';
+      });
+
+      function createHeart() {
+        if (!heartsContainer) return;
+        const heart = document.createElement('div');
+        heart.classList.add('float-heart');
+        heart.innerHTML = ['❤️','🧡','💛','💚','💙','💜','💖','💗','💝','🥰','😍','💞'][Math.floor(Math.random() * 12)];
+        heart.style.left = Math.random() * 90 + '%';
+        heart.style.fontSize = (Math.random() * 40 + 25) + 'px';
+        heart.style.animationDuration = (Math.random() * 1.5 + 1.8) + 's';
+        heartsContainer.appendChild(heart);
+        setTimeout(() => heart.remove(), 2600);
+      }
+
+      // Initial position
+      setTimeout(moveNoButton, 100);
+
+      // Add some playful text when trying to click NO (even though it's unclickable)
+      noBtn.addEventListener('mouseover', () => {
+        // Just for fun - change cursor style
+        document.body.style.cursor = 'help';
+      });
+
+      noBtn.addEventListener('mouseout', () => {
+        document.body.style.cursor = 'default';
+      });
+
+    })();
+  </script>
+
+  <style>
+    .button-hug {
+      position: relative;
+      background: #fff0fa8c;
+    }
+    #noBtn {
+      transition: left 0.15s ease, top 0.15s ease;
+      cursor: default;
+      pointer-events: none;  /* This makes it completely unclickable! */
+      animation: float 3s infinite ease-in-out;
+    }
+    #yesBtn {
+      position: absolute;
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      z-index: 10;
+    }
+    .celebration img {
+      background: #ffe7f0;
+    }
+    .game-hint {
+      margin: 10px auto 5px;
+    }
+  </style>
+</body>
+</html>
